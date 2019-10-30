@@ -1,0 +1,21 @@
+#include <Windows.h>
+#include <stdio.h>
+#include <tchar.h>
+#include <string.h>
+#include <iostream>
+
+using namespace std;
+int main()
+{
+	ShellExecute(NULL, "open", "www.baidu.com", NULL, NULL, SW_SHOWNOACTIVATE);
+	Sleep(100);
+	HWND hw = FindWindow("ConsoleWindowClass", NULL);							//获取窗口句柄
+	SetWindowPos(hw, HWND_TOPMOST, 800, 200, 0, 0, SWP_NOSIZE|| SW_SHOW);		//设置窗口
+	SetForegroundWindow(hw);													//获取焦点
+	while (hw != GetForegroundWindow())											//判断当前焦点
+	{
+		SetForegroundWindow(hw);
+	}
+	cin.get();
+	return 0;
+}
